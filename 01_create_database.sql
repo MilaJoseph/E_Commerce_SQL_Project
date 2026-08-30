@@ -1,0 +1,5 @@
+CREATE DATABASE E_commerce;
+USE E_commerce;
+
+SHOW DATABASES;
+SELECT DATABASE();
