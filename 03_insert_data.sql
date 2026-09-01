@@ -153,21 +153,34 @@ VALUES
 
 INSERT INTO Payments
 (payment_id, order_id, payment_date, payment_type, amount)
-SELECT
-    ROW_NUMBER() OVER (ORDER BY o.order_id) + 5000 AS payment_id,
-    o.order_id,
-    o.order_date AS payment_date,
-    CASE
-        WHEN o.order_id % 4 = 1 THEN 'UPI'
-        WHEN o.order_id % 4 = 2 THEN 'Credit Card'
-        WHEN o.order_id % 4 = 3 THEN 'Debit Card'
-        ELSE 'Net Banking'
-    END AS payment_type,
-    SUM(p.price * oi.quantity) AS amount
-FROM Orders o
-JOIN Order_items oi
-    ON o.order_id = oi.order_id
-JOIN Products p
-    ON oi.product_id = p.product_id
-GROUP BY o.order_id, o.order_date;
-
+VALUES
+(5001, 1001, '2025-09-20', 'UPI', 6995.00),
+(5002, 1002, '2025-09-22', 'Credit Card', 3499.00),
+(5003, 1003, '2025-09-25', 'Debit Card', 7097.00),
+(5004, 1004, '2025-09-28', 'Net Banking', 2697.00),
+(5005, 1005, '2025-10-01', 'UPI', 3398.00),
+(5006, 1006, '2025-10-03', 'Credit Card', 2998.00),
+(5007, 1007, '2025-10-05', 'Debit Card', 7496.00),
+(5008, 1008, '2025-10-08', 'Net Banking', 1398.00),
+(5009, 1009, '2025-10-10', 'UPI', 2197.00),
+(5010, 1010, '2025-10-12', 'Credit Card', 3299.00),
+(5011, 1011, '2025-10-15', 'Debit Card', 4398.00),
+(5012, 1012, '2025-10-18', 'Net Banking', 1098.00),
+(5013, 1013, '2025-10-20', 'UPI', 7196.00),
+(5014, 1014, '2025-10-22', 'Credit Card', 799.00),
+(5015, 1015, '2025-10-25', 'Debit Card', 5897.00),
+(5016, 1016, '2025-10-27', 'Net Banking', 2398.00),
+(5017, 1017, '2025-10-29', 'UPI', 3395.00),
+(5018, 1018, '2025-11-01', 'Credit Card', 3499.00),
+(5019, 1019, '2025-11-03', 'Debit Card', 5697.00),
+(5020, 1020, '2025-11-05', 'Net Banking', 3798.00),
+(5021, 1021, '2025-11-08', 'UPI', 4396.00),
+(5022, 1022, '2025-11-10', 'Credit Card', 4298.00),
+(5023, 1023, '2025-11-12', 'Debit Card', 6998.00),
+(5024, 1024, '2025-11-15', 'Net Banking', 3146.00),
+(5025, 1025, '2025-11-18', 'UPI', 1598.00),
+(5026, 1026, '2025-11-20', 'Credit Card', 4397.00),
+(5027, 1027, '2025-11-22', 'Debit Card', 4496.00),
+(5028, 1028, '2025-11-25', 'Net Banking', 4998.00),
+(5029, 1029, '2025-11-28', 'UPI', 2297.00),
+(5030, 1030, '2025-11-30', 'Credit Card', 5398.00);
