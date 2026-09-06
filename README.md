@@ -106,6 +106,32 @@ The project uses six related tables:
 - Window functions can be used to rank products within each category.
 - Views can simplify repeated analysis by storing reusable query results.
 
+## Project Screenshots
+
+### E-Commerce ER Diagram
+
+![E-Commerce ER Diagram](screenshots/ecommerce_er_diagram.png)
+
+### Top-Selling Product
+
+![Top-Selling Product](screenshots/Top_selling_product.png)
+
+### Highest-Revenue Product in Each Category
+
+![Highest-Revenue Product in Each Category](screenshots/Highest_revenu_product_in_each_category.png)
+
+### Highest Revenue Month
+
+![Highest Revenue Month](screenshots/highest_revenue_month.png)
+
+### Customer Spending Classification
+
+![Customer Spending Classification](screenshots/Customer_spending_classification.png)
+
+### Highest Revenue Payment Method
+
+![Highest Revenue Payment Method](screenshots/highest_revenue_payment_method.png)
+
 ## What I Learned
 
 Through this project, I practiced designing a relational database and writing SQL queries to answer practical business questions.
