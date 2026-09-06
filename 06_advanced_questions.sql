@@ -66,3 +66,67 @@ on s.seller_id = p.seller_id
 join order_items as oi
 on p.product_id = oi.product_id
 group by s.seller_type;
+
+
+-- Q7. Which payment method generated the highest total revenue?
+create or replace view payment_method_revenue as
+ select pa.payment_type , sum(oi.quantity * p.price) as total_revenue
+ from products as p
+ join order_items as oi
+ on p.product_id = oi.product_id
+ join payments as pa
+ on pa.order_id = oi.order_id
+ group by payment_type;
+
+select payment_type , total_revenue as highest_total_revenue
+from payment_method_revenue
+order by total_revenue desc
+limit 1; 
+
+-- Q8. Customers who spent more than the average customer spend 
+create or replace view Customer_spending
+as select  c.customer_id, c.customer_name , sum(oi.quantity * p.price) AS customer_spending
+from customers as c
+join orders as o
+on c.customer_id = o.customer_id
+join order_items as oi
+on o.order_id = oi.order_id
+join products as p
+on oi.product_id = p.product_id
+group by c.customer_id , c.customer_name ;
+
+select c.customer_id , c.customer_name , round(sum(oi.quantity * p.price)) as total_spending
+from customers as c
+join orders as o
+on c.customer_id = o.customer_id
+join order_items as oi
+on o.order_id = oi.order_id
+join products as p
+on oi.product_id = p.product_id
+group by c.customer_id , c.customer_name
+having total_spending > (
+select avg(customer_spending) from Customer_spending);
+
+-- Q9. Spending classification using CASE
+select customer_id , customer_name , customer_spending ,
+case 
+	when customer_spending >= 10000 then "High Spending"
+    when customer_spending >= 5000 then "Medium Spending"
+    else "Low Spending"
+end as spending_category
+from customer_spending;
+
+-- Q10. Display all orders placed by a particular customer
+delimiter //
+create procedure get_customer_orders(in input_customer_id int)
+begin 
+	select order_id , customer_id , order_date , order_status
+    from orders
+    where customer_id = input_customer_id
+    order by order_date;
+end //
+
+delimiter ;
+
+call get_customer_orders(1);
+
