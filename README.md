@@ -30,6 +30,7 @@ The database contains sample data for:
 ## Database Schema
 
 The project uses six related tables:
+![E-Commerce ER Diagram](screenshots/ecommerce_er_diagram.png)
 
 | Table | Description |
 |---|---|
